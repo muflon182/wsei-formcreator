@@ -1,0 +1,19 @@
+Narzędzia pomocnicze - webpack (ale także np. gulp/grunt)
+Inicjalizacja projektu npm (realnie: stworzenie pliku package.json)
+npm: npm init -y
+Instalacja webpack: 
+npm install --save-dev webpack webpack-cli
+Instalacja narzędzi dla Webpacka: 
+ npm install ts-loader css-loader style-loader node-sass --save-dev //itd itd - w zależności co potrzebujemy
+Konfiguracja webpacka jest w pliku webpack.config.js (musimy ją stworzyć wg własnych potrzeb)
+Uruchomienie Webpackk:
+npx webpack
+
+Możemy też dodać skrypt do skryptów npm w pliku package.json:
+"scripts": [
+    "start": "npx webpack-dev-server --content-base src"
+]
+Tak dodany skrypt można uruchomić z linii poleceń (npm start) lub korzystając z VSC i Run task (ctrl+sh+b)
+
+W projekcie starter-webpack znajdziesz gotową podstawową konfigurację z webpackiem.
+
