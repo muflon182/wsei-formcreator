@@ -6,9 +6,9 @@ export default class SelectField extends FieldLabel implements Field {
 	name: string;
 	label: string;
 	type: FieldType = FieldType.Select;
-	value: string;
+	value: string[];
 
-	constructor(name: string, label: string, value: string) {
+	constructor(name: string, label: string, value: string[]) {
 		super(label);
 		this.name = name;
 		this.value = value;
