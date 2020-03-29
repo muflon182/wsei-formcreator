@@ -23,5 +23,11 @@ export default class Form {
 
 	getValue(): string[] {
 		return this.fields.map((field: Field) => field.value as string);
+    }
+    
+    render(): string {
+		let result= ``;
+		this.fields.forEach((field: Field) => result += field.render());
+		return result;
 	}
 }

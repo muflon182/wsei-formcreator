@@ -15,6 +15,7 @@ export default class TextAreaField extends FieldLabel implements Field {
 	}
 
 	render(): string {
-		return '';
+		return `<p><label for="${this.name}">${this.label}</label>
+        <textarea id="${this.name}">${this.value}</textarea></p>`;
 	}
 }

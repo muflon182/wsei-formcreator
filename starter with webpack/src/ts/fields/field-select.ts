@@ -15,6 +15,12 @@ export default class SelectField extends FieldLabel implements Field {
 	}
 
 	render(): string {
-		return '';
+        let result = `<p><label for="${this.name}">${this.label}</label><select id="${this.name}" id="${this.name}">`
+
+        this.value.forEach(value => result += `<option value="${this.value}">${this.value} stacjonarne</option>`)
+
+        result += `</select></p>`;
+        
+        return result;
 	}
 }

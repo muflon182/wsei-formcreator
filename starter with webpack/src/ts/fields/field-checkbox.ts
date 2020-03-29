@@ -15,6 +15,6 @@ export default class CheckboxField extends FieldLabel implements Field {
 	}
 
 	render(): string {
-		return '';
+		return `<p><label for="${this.name}">${this.label}</label><input type="${this.type}" name="${this.name}" id="${this.name}" value="${this.value}"></p>`;
 	}
 }

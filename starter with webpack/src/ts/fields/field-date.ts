@@ -1,6 +1,5 @@
 import FieldType from './field.enum';
 import Field from './field.interface';
-
 import FieldLabel from './field-label';
 
 export default class DateField extends FieldLabel implements Field {
@@ -16,6 +15,7 @@ export default class DateField extends FieldLabel implements Field {
 	}
 
 	render(): string {
-		return '';
+		return `<p><label for="${this.name}">${this.label}</label>
+        <input type="${this.type}" name="${this.name}" id="${this.name}" value="${this.value}"></p>`;
 	}
 }
