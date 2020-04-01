@@ -26,8 +26,8 @@ export default class Form {
     }
     
     render(): string {
-		let result= ``;
+		let result = `<form>`;
 		this.fields.forEach((field: Field) => result += field.render());
-		return result;
+		return result + `</form>`;
 	}
 }

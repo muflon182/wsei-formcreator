@@ -1,4 +1,4 @@
-import FieldType from './Field.enum';
+import FieldType from './field.enum';
 
 export default interface Field {
 	name: string;

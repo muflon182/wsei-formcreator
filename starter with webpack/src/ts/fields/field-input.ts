@@ -16,6 +16,6 @@ export default class InputField extends FieldLabel implements Field {
 
 	render(): string {
 		return `<p><label for="${this.name}">${this.label}</label>
-        <input type="${this.type}" name="${this.name}" id="${this.name}" value="${this.value} required"></p>`;
+        <input type="${this.type}" name="${this.name}" id="${this.name}" value="${this.value}" required></p>`;
 	}
 }
