@@ -1,4 +1,9 @@
-import './../scss/main.scss';
+import Form from './form';
 
-const hello = "yep, it's working";
-document.body.innerHTML = hello;
+class App {
+	static createForm(): void {
+		document.querySelector('#root').innerHTML = new Form().render();
+	}
+}
+
+document.addEventListener('DOMContentLoaded', App.createForm);
