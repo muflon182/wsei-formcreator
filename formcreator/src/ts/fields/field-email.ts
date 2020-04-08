@@ -12,6 +12,10 @@ export default class EmailField extends FieldLabel implements Field {
 		super(label);
 		this.name = name;
 		this.value = value;
+    }
+    
+    getValue(): string {
+		return this.value;
 	}
 
 	render(): string {

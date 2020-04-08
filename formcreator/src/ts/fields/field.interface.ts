@@ -5,5 +5,6 @@ export default interface Field {
 	label: string;
 	type: FieldType;
 	value: string | string[];
-	render: () => string;
+    render: () => string;
+    getValue: () => string | string[];
 };
