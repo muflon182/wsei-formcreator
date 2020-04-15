@@ -4,7 +4,8 @@ export default interface Field {
 	name: string;
 	label: string;
 	type: FieldType;
-	value: string | string[];
-    render: () => string;
-    getValue: () => string | string[];
+	value: string;
+	options?: string[];
+	render: () => HTMLDivElement;
+	getValue: () => string;
 };

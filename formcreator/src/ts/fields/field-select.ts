@@ -4,27 +4,53 @@ import FieldLabel from './field-label';
 
 export default class SelectField extends FieldLabel implements Field {
 	name: string;
-	label: string;
 	type: FieldType = FieldType.Select;
-	value: string[];
+	value: string;
+	options: string[];
 
-	constructor(name: string, label: string, value: string[]) {
+	constructor(
+		name: string,
+		label: string,
+		value: string = '',
+		options: string[] = [ 'Option 1', 'Option 2', 'Option 3', 'Option 4' ]
+	) {
 		super(label);
 		this.name = name;
 		this.value = value;
-    }
-    
-    getValue(): string[] {
+		this.options = options;
+	}
+
+	getValue(): string {
 		return this.value;
 	}
 
-	render(): string {
-        let result = `<p><label for="${this.name}">${this.label}</label><select id="${this.name}" id="${this.name}">`
+	render(): HTMLDivElement {
+		const fieldGroup: HTMLDivElement = document.createElement('div');
+		fieldGroup.classList.add('field-group');
 
-        this.value.forEach(value => result += `<option value="${value}">${value}</option>`)
+		const label: HTMLLabelElement = document.createElement('label');
+		label.classList.add('field-label');
+		label.setAttribute('for', `${this.name}`);
+		label.textContent = `${this.label}: `;
 
-        result += `</select></p>`;
-        
-        return result;
+		const select: HTMLSelectElement = document.createElement('select');
+		select.classList.add('field-select');
+		select.setAttribute('id', `${this.name}`);
+
+		this.options.forEach((value: string, key: number) => {
+			const option: HTMLOptionElement = document.createElement('option');
+			option.setAttribute('value', `${key + 1}`);
+			option.textContent = value;
+			select.appendChild(option);
+		});
+
+		select.addEventListener('change', () => {
+			this.value = select.options[select.selectedIndex].textContent;
+		});
+
+		fieldGroup.appendChild(label);
+		fieldGroup.appendChild(select);
+
+		return fieldGroup;
 	}
 }
