@@ -3,11 +3,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
-	entry: './src/ts/main.ts',
+	entry: './formcreator/src/ts/main.ts',
 	output: {
 		filename: 'index.js',
 		path: path.resolve(__dirname, './dist')
 	},
+	watch: true,
 	resolve: {
 		extensions: [ '.tsx', '.ts', '.js', '.json' ]
 	},
@@ -15,7 +16,7 @@ module.exports = {
 	plugins: [
 		new CopyPlugin([
 			{
-				from: './src/screens/*.html',
+				from: './formcreator/src/screens/*.html',
 				to: './',
 				flatten: true
 			}
