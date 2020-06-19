@@ -24,13 +24,17 @@ export default class LocStorage implements DataStorage {
 		const documents: any = {};
 
 		Object.keys(localStorage).forEach((id: string) => {
-			if (!id.includes('formcreator-')) {
-				return;
+			if (id.includes('formcreator-document')) {
+				documents[id] = JSON.parse(localStorage.getItem(id));
 			}
-
-			documents[id] = JSON.parse(localStorage.getItem(id));
 		});
 
 		return documents;
+	}
+
+	saveForm(form: any): string {
+		const id: string = Date.now().toString();
+		localStorage.setItem(`formcreator-form-${id}`, JSON.stringify(form));
+		return `formcreator-form-${id}`;
 	}
 }

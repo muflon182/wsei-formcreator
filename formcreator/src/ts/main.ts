@@ -1,15 +1,28 @@
 import './../scss/main.scss';
-import Form from './form';
+import Form, { createFieldsFromDoc } from './form';
 import { DocumentList } from './store/document-list';
+import { Router, Path } from './routing/router';
+import FormCreator from './form-creator';
 
-class App {
-	static createForm(): void {
-		console.log(window.location.pathname);
-		const form: Form = new Form();
+export default class App {
+	static createForm(doc?: any, id?: string): void {
+		let form: Form;
+		if (doc !== undefined) {
+			form = new Form(createFieldsFromDoc(doc));
+		} else {
+			form = new Form();
+		}
+
 		document.querySelector('#root').appendChild(form.render());
 
 		document.querySelector('#save-document').addEventListener('click', () => {
-			form.save();
+			if (id !== undefined) {
+				form.save(id);
+				Router.setPath(Path.DocumentList);
+			} else {
+				form.save();
+				Router.setPath(Path.Index);
+			}
 		});
 	}
 
@@ -22,17 +35,29 @@ class App {
 		listContainer.innerHTML = '';
 		listContainer.appendChild(documents.render());
 	}
+
+	static editDocument(id: string) {
+		const document: any = new DocumentList().getDocument(id);
+		App.createForm(document, id);
+	}
+
+	static buildForm() {
+		const root: HTMLDivElement = document.querySelector('#root');
+		const addFieldBtn: HTMLButtonElement = document.querySelector('#add-field');
+		const saveFormBtn: HTMLButtonElement = document.querySelector('#save-form');
+
+		addFieldBtn.addEventListener('click', function() {
+			formCreator.addFormField();
+			root.append(formCreator.render());
+		});
+
+		const formCreator: FormCreator = new FormCreator();
+
+		saveFormBtn.addEventListener('click', () => {
+			formCreator.saveForm();
+			Router.setPath(Path.Index);
+		});
+	}
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-	switch (window.location.pathname) {
-		case '/new-document.html':
-			App.createForm();
-			break;
-		case '/document-list.html':
-			App.createDocumentList();
-			break;
-		default:
-			throw Error('Wrong endpoint!');
-	}
-});
+document.addEventListener('DOMContentLoaded', Router.useRoute);
