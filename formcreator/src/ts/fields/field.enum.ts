@@ -1,7 +1,7 @@
 enum FieldType {
 	Text = 'text',
 	TextArea = 'textarea',
-	Date = 'data',
+	Date = 'date',
 	Email = 'email',
 	Select = 'select',
 	Checkbox = 'checkbox'
