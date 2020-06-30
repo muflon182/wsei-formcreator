@@ -3,18 +3,13 @@ import Form, { createFieldsFromDoc } from './form';
 import { DocumentList } from './store/document-list';
 import { Router, Path } from './routing/router';
 import FormCreator from './form-creator';
+import FormList from './store/form-list';
 
 export default class App {
-	static createForm(doc?: any, id?: string): void {
-		let form: Form;
-		if (doc !== undefined) {
-			form = new Form(createFieldsFromDoc(doc));
-		} else {
-			form = new Form();
-		}
+	static showForm(doc: any, id?: string): void {
+		const form: Form = new Form(createFieldsFromDoc(doc));
 
 		document.querySelector('#root').appendChild(form.render());
-
 		document.querySelector('#save-document').addEventListener('click', () => {
 			if (id !== undefined) {
 				form.save(id);
@@ -36,11 +31,6 @@ export default class App {
 		listContainer.appendChild(documents.render());
 	}
 
-	static editDocument(id: string) {
-		const document: any = new DocumentList().getDocument(id);
-		App.createForm(document, id);
-	}
-
 	static buildForm() {
 		const root: HTMLDivElement = document.querySelector('#root');
 		const addFieldBtn: HTMLButtonElement = document.querySelector('#add-field');
@@ -57,6 +47,15 @@ export default class App {
 			formCreator.saveForm();
 			Router.setPath(Path.Index);
 		});
+	}
+
+	static createFormList() {
+		const listContainer: HTMLDivElement = document.querySelector('#root');
+
+		const forms: FormList = new FormList();
+		forms.getForms();
+
+		listContainer.appendChild(forms.render());
 	}
 }
 
